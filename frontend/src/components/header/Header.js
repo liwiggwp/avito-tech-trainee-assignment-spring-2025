@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header({onFormOpen}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ backgroundColor: "#161616" }}>
@@ -36,6 +36,7 @@ export default function Header() {
                   backgroundColor: "#0095FF",
                   borderRadius: "10px",
                 }}
+                onClick={onFormOpen}
               >
                 Создать задачу
               </Button>
