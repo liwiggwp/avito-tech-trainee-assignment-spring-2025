@@ -9,14 +9,14 @@ import {
 import FormTaskField from "./FormTaskField";
 
 const statuses = [
-  { id: 1, name: "К выполнению" },
-  { id: 2, name: "Выполняется" },
-  { id: 3, name: "Выполнено" },
+  { id: 1, name: "Backlog" },
+  { id: 2, name: "InProgress" },
+  { id: 3, name: "Done" },
 ];
 const priorities = [
-  { id: 1, name: "Низкий" },
-  { id: 2, name: "Средний" },
-  { id: 3, name: "Высокий" },
+  { id: 1, name: "Low" },
+  { id: 2, name: "Medium" },
+  { id: 3, name: "High" },
 ];
 const responsible = [
   { id: 1, fullName: "Александра Ветрова" },
