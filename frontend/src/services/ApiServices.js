@@ -5,6 +5,7 @@ export default function ApiServices() {
   const { get, post, put } = httpService();
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState(null);
+  const [boards, setBoards] = useState([]);
 
   const getTasks = async () => {
     try {
@@ -55,8 +56,19 @@ export default function ApiServices() {
     }
   };
 
+  const getBoards = async () => {
+    try {
+      const response = await get(`/boards`);
+      setBoards(response.data.data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   useEffect(() => {
     getTasks();
+    getBoards();
   }, []);
 
   return {
@@ -65,7 +77,9 @@ export default function ApiServices() {
     createTask,
     updateTask,
     updateStatusTask,
+    getBoards,
     tasks,
     task,
+    boards,
   };
 }
