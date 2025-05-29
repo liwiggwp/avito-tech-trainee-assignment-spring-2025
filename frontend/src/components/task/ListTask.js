@@ -20,7 +20,7 @@ export default function ListTask({ tasks }) {
               </Box>
               <Box sx={{ flex: 2 }}>
                 <Typography variant="body2">
-                  {task.assignee?.fullName || task.responsible || "—"}
+                  {task.assignee.fullName}
                 </Typography>
               </Box>
               <Box sx={{ flex: 1 }}>
