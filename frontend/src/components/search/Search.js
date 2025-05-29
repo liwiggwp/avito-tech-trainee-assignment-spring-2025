@@ -18,7 +18,7 @@ export default function ({ onSearchChange }) {
   };
 
   return (
-    <Box
+     <Box
       sx={{
         position: "relative",
         backgroundColor: alpha("#161616", 0.15),
@@ -29,32 +29,39 @@ export default function ({ onSearchChange }) {
         "&:hover": {
           backgroundColor: alpha("#161616", 0.25),
         },
+        minHeight: 40,
+        display: "flex",
+        alignItems: "center",
       }}
     >
       <Box
         sx={{
-          padding: "0 16px",
-          height: "100%",
           position: "absolute",
-          pointerEvents: "none",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: 40,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          pointerEvents: "none",
         }}
       >
         <SearchIcon />
       </Box>
       <InputBase
+        fullWidth
         placeholder="Поиск"
         value={searchTerm}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         sx={{
           color: "inherit",
+          width: "100%",
           "& .MuiInputBase-input": {
-            padding: 1,
-            paddingLeft: 6,
+            padding: "8px 8px 8px 40px",
             width: "100%",
+            boxSizing: "border-box",
           },
         }}
       />
