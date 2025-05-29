@@ -103,7 +103,8 @@ export default function TaskPage() {
               borderColor: "#161616",
               "&:hover": {
                 borderColor: "#161616",
-                backgroundColor: "rgba(22,22,22,0.04)",
+                backgroundColor: "#161616",
+                color: "white",
               },
             }}
           >
