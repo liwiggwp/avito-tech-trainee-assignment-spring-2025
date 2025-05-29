@@ -7,6 +7,7 @@ import {
   Box,
   AppBar,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -15,8 +16,18 @@ export default function Header() {
         <Container maxWidth="lg">
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-              <Typography variant="h6">Все задачи</Typography>
-              <Typography variant="h6">Проекты</Typography>
+              <Link
+                to="/issues"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Typography variant="h6">Все задачи</Typography>
+              </Link>
+              <Link
+                to="/boards"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Typography variant="h6">Проекты</Typography>
+              </Link>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Button
