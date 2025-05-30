@@ -18,14 +18,14 @@ export default function FormTask() {
     (state) => state.form
   );
 
-  const { users, boards } = ApiServices();
+  const { users, boards, createTask, updateTask } = ApiServices();
 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     project: "",
     priority: priorities.find((p) => p.name === "Medium")?.id,
-    status: statuses.find((s) => s.name === "ToDo")?.id,
+    status: statuses.find((s) => s.name === "Backlog")?.id,
     responsible: "",
   });
 
@@ -46,11 +46,36 @@ export default function FormTask() {
         description: "",
         project: boardId || "",
         priority: priorities.find((p) => p.name === "Medium")?.id || "",
-        status: statuses.find((s) => s.name === "ToDo")?.id || "",
+        status: statuses.find((s) => s.name === "Backlog")?.id || "",
         responsible: "",
       });
     }
   }, [currentTask, mode, boardId]);
+
+  const handleSubmit = async () => {
+    const payload = {
+      assigneeId: formData.responsible,
+      description: formData.description,
+      priority: priorities.find((p) => p.id == formData.priority)?.name,
+      title: formData.title,
+    };
+    try {
+      if (mode === "edit" && currentTask) {
+        await updateTask(currentTask.id, {
+          ...payload,
+          status: statuses.find((s) => s.id === formData.status)?.name,
+        });
+      } else {
+        await createTask({
+          ...payload,
+          boardId: formData.project,
+        });
+      }
+      handleClose();
+    } catch (e) {
+      console.error(e.response?.data || e.message);
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -77,9 +102,13 @@ export default function FormTask() {
           priorities={priorities}
           projects={boards}
           responsible={users}
+          disableStatus={mode === "create"}
         />
       </DialogContent>
-      <DialogActions sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <DialogActions
+        sx={{ display: "flex", justifyContent: "flex-end" }}
+        onClick={handleSubmit}
+      >
         <Button variant="contained" color="primary">
           {mode === "edit" ? "Обновить" : "Создать"}
         </Button>

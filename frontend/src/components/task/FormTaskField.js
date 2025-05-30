@@ -8,6 +8,7 @@ export default function TaskFormFields({
   priorities,
   projects,
   responsible,
+  disableStatus = false,
 }) {
   return (
     <>
@@ -70,6 +71,7 @@ export default function TaskFormFields({
         name="status"
         value={formData.status}
         onChange={handleChange}
+        disabled={disableStatus}
         required
       >
         {statuses.map((option) => (
