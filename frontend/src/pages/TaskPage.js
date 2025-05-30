@@ -13,13 +13,7 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ApiServices from "../services/ApiServices";
 import ListTask from "../components/task/ListTask";
 import Search from "../components/search/Search";
-
-const statuses = [
-  { id: 1, name: "Backlog" },
-  { id: 2, name: "ToDo" },
-  { id: 3, name: "InProgress" },
-  { id: 4, name: "Done" },
-];
+import { statuses } from "../utils/Constants";
 
 export default function TaskPage() {
   const { tasks, boards } = ApiServices();

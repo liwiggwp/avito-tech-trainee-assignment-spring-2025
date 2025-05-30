@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import ApiServices from "../services/ApiServices";
 import ColumnBoard from "../components/board/ColumnBoard";
+import { getColumnNameById, statuses } from "../utils/Constants";
 
 export default function BoardPage() {
   const { id } = useParams();
@@ -26,22 +27,13 @@ export default function BoardPage() {
         {projectTitle}
       </Typography>
       <Box sx={{ display: "flex" }}>
-        <ColumnBoard
-          nameColumn="Backlog"
-          taskBoard={taskBoard.filter((task) => task.status === "Backlog")}
-        />
-        <ColumnBoard
-          nameColumn="To do"
-          taskBoard={taskBoard.filter((task) => task.status === "ToDo")}
-        />
-        <ColumnBoard
-          nameColumn="In progress"
-          taskBoard={taskBoard.filter((task) => task.status === "InProgress")}
-        />
-        <ColumnBoard
-          nameColumn="Done"
-          taskBoard={taskBoard.filter((task) => task.status === "Done")}
-        />
+        {statuses.map((status) => (
+          <ColumnBoard
+            key={status.id}
+            nameColumn={getColumnNameById(status.id)}
+            taskBoard={taskBoard.filter((task) => task.status === status.name)}
+          />
+        ))}
       </Box>
     </>
   );

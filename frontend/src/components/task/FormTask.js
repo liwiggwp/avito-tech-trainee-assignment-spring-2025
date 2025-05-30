@@ -7,17 +7,8 @@ import {
   Button,
 } from "@mui/material";
 import FormTaskField from "./FormTaskField";
+import { statuses, priorities } from "../../utils/Constants";
 
-const statuses = [
-  { id: 1, name: "Backlog" },
-  { id: 2, name: "InProgress" },
-  { id: 3, name: "Done" },
-];
-const priorities = [
-  { id: 1, name: "Low" },
-  { id: 2, name: "Medium" },
-  { id: 3, name: "High" },
-];
 const responsible = [
   { id: 1, fullName: "Александра Ветрова" },
   { id: 2, fullName: "Илья Романов" },
