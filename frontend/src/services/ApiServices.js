@@ -6,6 +6,7 @@ export default function ApiServices() {
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState(null);
   const [boards, setBoards] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const getTasks = async () => {
     try {
@@ -75,9 +76,20 @@ export default function ApiServices() {
     }
   };
 
+  const getUsers = async () => {
+    try {
+      const response = await get(`/users`);
+      setUsers(response.data.data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   useEffect(() => {
     getTasks();
     getBoards();
+    getUsers();
   }, []);
 
   return {
@@ -88,8 +100,10 @@ export default function ApiServices() {
     updateStatusTask,
     getBoards,
     getBoardsById,
+    getUsers,
     tasks,
     task,
     boards,
+    users,
   };
 }
