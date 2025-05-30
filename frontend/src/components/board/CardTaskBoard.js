@@ -8,9 +8,10 @@ import {
   Chip,
   Avatar,
 } from "@mui/material";
-import { priorityColor, statusColor } from "../../utils/ColorChip";
+import { priorityColor } from "../../utils/ColorChip";
 import { useDispatch } from "react-redux";
 import { openEditForm } from "../../store/slices/formSlice";
+import StatusChipMenu from "../StatusChipMenu";
 
 export default function CardTaskBoard({ task }) {
   const { id } = useParams();
@@ -30,12 +31,7 @@ export default function CardTaskBoard({ task }) {
               {task.title}
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Chip
-                label={task.status}
-                size="small"
-                sx={{ width: "50%" }}
-                color={statusColor(task.status)}
-              />
+              <StatusChipMenu task={task} />
               <Chip
                 label={task.priority}
                 size="small"

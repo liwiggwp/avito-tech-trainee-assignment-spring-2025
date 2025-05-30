@@ -1,8 +1,9 @@
 import React from "react";
 import { Typography, Card, CardContent, Chip, Box } from "@mui/material";
-import { priorityColor, statusColor } from "../../utils/ColorChip";
+import { priorityColor } from "../../utils/ColorChip";
 import { useDispatch } from "react-redux";
 import { openEditForm } from "../../store/slices/formSlice";
+import StatusChipMenu from "../StatusChipMenu";
 
 export default function ListTask({ tasks }) {
   const dispatch = useDispatch();
@@ -41,12 +42,7 @@ export default function ListTask({ tasks }) {
                 />
               </Box>
               <Box sx={{ flex: 1 }}>
-                <Chip
-                  label={task.status}
-                  size="small"
-                  sx={{ width: "80%" }}
-                  color={statusColor(task.status)}
-                />
+                <StatusChipMenu task={task} />
               </Box>
             </Box>
           </CardContent>
