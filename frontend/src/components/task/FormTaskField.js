@@ -6,6 +6,7 @@ export default function TaskFormFields({
   handleChange,
   statuses,
   priorities,
+  projects,
   responsible,
 }) {
   return (
@@ -29,6 +30,22 @@ export default function TaskFormFields({
         multiline
         rows={4}
       />
+      <TextField
+        select
+        fullWidth
+        margin="dense"
+        label="Проект"
+        name="project"
+        value={formData.project}
+        onChange={handleChange}
+        required
+      >
+        {projects.map((option) => (
+          <MenuItem key={option.id} value={option.id}>
+            {option.name}
+          </MenuItem>
+        ))}
+      </TextField>
       <TextField
         select
         fullWidth

@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import {
   Box,
   Card,
@@ -12,15 +13,16 @@ import { useDispatch } from "react-redux";
 import { openEditForm } from "../../store/slices/formSlice";
 
 export default function CardTaskBoard({ task }) {
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   return (
     <>
       <Card
         variant="outlined"
-        onClick={() => dispatch(openEditForm(task))}
+        onClick={() => dispatch(openEditForm({ ...task, boardId: id }))}
         key={task.id}
-        sx={{ mb: 2 , cursor: 'pointer'}}
+        sx={{ mb: 2, cursor: "pointer" }}
       >
         <CardContent sx={{ p: 2 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>

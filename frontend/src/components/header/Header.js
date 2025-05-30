@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocation, useParams } from "react-router-dom";
 import {
   Button,
   Container,
@@ -13,11 +14,19 @@ import { openCreateForm } from "../../store/slices/formSlice";
 
 export default function Header() {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const match = location.pathname.match(/^\/board\/(\d+)/); 
+  const boardId = match ? match[1] : null;
 
   const handleOpenCreateTask = () => {
-    dispatch(openCreateForm());
+    if (boardId) {
+      dispatch(openCreateForm({ boardId }));
+    } else {
+      dispatch(openCreateForm());
+    }
   };
-
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ backgroundColor: "#161616" }}>

@@ -14,9 +14,11 @@ import ApiServices from "../../services/ApiServices";
 
 export default function FormTask() {
   const dispatch = useDispatch();
-  const { isOpen, mode, currentTask } = useSelector((state) => state.form);
-  
-  const { users } = ApiServices();
+  const { isOpen, mode, currentTask, boardId } = useSelector(
+    (state) => state.form
+  );
+
+  const { users, boards } = ApiServices();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -32,7 +34,7 @@ export default function FormTask() {
       setFormData({
         title: currentTask.title || "",
         description: currentTask.description || "",
-        project: currentTask.project || "",
+        project: currentTask.boardId || "",
         priority:
           priorities.find((p) => p.name === currentTask.priority)?.id || "",
         status: statuses.find((s) => s.name === currentTask.status)?.id || "",
@@ -42,13 +44,21 @@ export default function FormTask() {
       setFormData({
         title: "",
         description: "",
-        project: "",
+        project: boardId || "",
         priority: priorities.find((p) => p.name === "Medium")?.id || "",
         status: statuses.find((s) => s.name === "ToDo")?.id || "",
         responsible: "",
       });
     }
-  }, [currentTask, mode]);
+  }, [currentTask, mode, boardId]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleClose = () => {
     dispatch(closeForm());
@@ -62,9 +72,10 @@ export default function FormTask() {
       <DialogContent>
         <FormTaskField
           formData={formData}
-          setFormData={setFormData}
+          handleChange={handleChange}
           statuses={statuses}
           priorities={priorities}
+          projects={boards}
           responsible={users}
         />
       </DialogContent>
