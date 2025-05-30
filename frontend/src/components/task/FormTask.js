@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Button,
+  Box,
 } from "@mui/material";
 import FormTaskField from "./FormTaskField";
 import { statuses, priorities } from "../../utils/Constants";
@@ -13,6 +15,7 @@ import { closeForm } from "../../store/slices/formSlice";
 import ApiServices from "../../services/ApiServices";
 
 export default function FormTask() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isOpen, mode, currentTask, boardId } = useSelector(
     (state) => state.form
@@ -85,6 +88,12 @@ export default function FormTask() {
     }));
   };
 
+  const handleToBoard = () => {
+    navigate(`/board/${currentTask.boardId}`, {
+      state: { taskToEdit: currentTask },
+    });
+  };
+
   const handleClose = () => {
     dispatch(closeForm());
   };
@@ -106,12 +115,31 @@ export default function FormTask() {
         />
       </DialogContent>
       <DialogActions
-        sx={{ display: "flex", justifyContent: "flex-end" }}
-        onClick={handleSubmit}
+        sx={{
+          display: "flex",
+          justifyContent:
+            mode === "edit" && currentTask?.boardId
+              ? "space-between"
+              : "flex-end",
+        }}
       >
-        <Button variant="contained" color="primary">
-          {mode === "edit" ? "Обновить" : "Создать"}
-        </Button>
+        {mode === "edit" && currentTask?.boardId && (
+          <Button variant="outlined" onClick={handleToBoard}>
+            Перейти на доску
+          </Button>
+        )}
+        <Box>
+          <Button variant="outlined" onClick={handleClose} sx={{ mr: 2 }}>
+            Отмена
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            disabled={!formData.title}
+          >
+            {mode === "edit" ? "Обновить" : "Создать"}
+          </Button>
+        </Box>
       </DialogActions>
     </Dialog>
   );
