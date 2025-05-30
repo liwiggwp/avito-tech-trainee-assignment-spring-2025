@@ -1,8 +1,12 @@
 import React from "react";
 import { Typography, Card, CardContent, Chip, Box } from "@mui/material";
 import { priorityColor, statusColor } from "../../utils/ColorChip";
+import { useDispatch } from "react-redux";
+import { openEditForm } from "../../store/slices/formSlice";
 
 export default function ListTask({ tasks }) {
+  const dispatch = useDispatch();
+
   if (tasks.length === 0) {
     return <Typography>Нет задач</Typography>;
   }
@@ -10,7 +14,12 @@ export default function ListTask({ tasks }) {
   return (
     <>
       {tasks.map((task) => (
-        <Card variant="outlined" sx={{ mb: 2 }} key={task.id}>
+        <Card
+          variant="outlined"
+          onClick={() => dispatch(openEditForm(task))}
+          sx={{ mb: 2, cursor: "pointer" }}
+          key={task.id}
+        >
           <CardContent sx={{ p: 2 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Box sx={{ flex: 3 }}>
