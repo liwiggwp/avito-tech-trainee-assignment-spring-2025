@@ -8,8 +8,16 @@ import {
   AppBar,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { openCreateForm } from "../../store/slices/formSlice";
 
-export default function Header({onFormOpen}) {
+export default function Header() {
+  const dispatch = useDispatch();
+
+  const handleOpenCreateTask = () => {
+    dispatch(openCreateForm());
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{ backgroundColor: "#161616" }}>
@@ -36,7 +44,7 @@ export default function Header({onFormOpen}) {
                   backgroundColor: "#0095FF",
                   borderRadius: "10px",
                 }}
-                onClick={onFormOpen}
+                onClick={handleOpenCreateTask}
               >
                 Создать задачу
               </Button>

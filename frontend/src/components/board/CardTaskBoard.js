@@ -8,11 +8,20 @@ import {
   Avatar,
 } from "@mui/material";
 import { priorityColor, statusColor } from "../../utils/ColorChip";
+import { useDispatch } from "react-redux";
+import { openEditForm } from "../../store/slices/formSlice";
 
 export default function CardTaskBoard({ task }) {
+  const dispatch = useDispatch();
+
   return (
     <>
-      <Card variant="outlined" key={task.id} sx={{ mb: 2 }}>
+      <Card
+        variant="outlined"
+        onClick={() => dispatch(openEditForm(task))}
+        key={task.id}
+        sx={{ mb: 2 , cursor: 'pointer'}}
+      >
         <CardContent sx={{ p: 2 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
             <Typography variant="body2" sx={{ fontWeight: "bold", mt: 1 }}>
