@@ -16,8 +16,9 @@ import Search from "../components/search/Search";
 
 const statuses = [
   { id: 1, name: "Backlog" },
-  { id: 2, name: "InProgress" },
-  { id: 3, name: "Done" },
+  { id: 2, name: "ToDo" },
+  { id: 3, name: "InProgress" },
+  { id: 4, name: "Done" },
 ];
 
 export default function TaskPage() {

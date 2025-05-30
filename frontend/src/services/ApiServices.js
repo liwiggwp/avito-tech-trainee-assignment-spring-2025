@@ -66,6 +66,15 @@ export default function ApiServices() {
     }
   };
 
+  const getBoardsById = async (id) => {
+    try {
+      const response = await get(`/boards/${id}`);
+      return response.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getTasks();
     getBoards();
@@ -78,6 +87,7 @@ export default function ApiServices() {
     updateTask,
     updateStatusTask,
     getBoards,
+    getBoardsById,
     tasks,
     task,
     boards,

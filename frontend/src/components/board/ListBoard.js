@@ -21,6 +21,7 @@ export default function ListBoard({ boards }) {
               <Box>
                 <Link
                   to={`/board/${board.id}`}
+                  state={{ projectTitle: board.name }}
                   style={{ textDecoration: "none" }}
                 >
                   <Button
