@@ -48,7 +48,7 @@ _Поддерживает предзаполненные поля_
 - Статус
 - Исполнитель
 
-![TaskForm](TaskForm.png)
+![TaskForm](assets\TaskForm.png)
 
 # Просмотр задач
 
@@ -57,7 +57,7 @@ _Поддерживает предзаполненные поля_
 - Клик по задаче открывает модальное окно с возможностью редактирования информации
 - Есть возможность перейти из задачи на страницу доски проекта, к которому она принадлежит
 
-![TaskPage](TaskPage.png)
+![TaskPage](assets\TaskPage.png)
 
 # Фильтрация и поиск задач
 
@@ -68,14 +68,14 @@ _Поддерживает предзаполненные поля_
 - По исполнителю
 - По названию задачи
 
-![SearchAndFilter](SearchAndFilter.png)
+![SearchAndFilter](assets\SearchAndFilter.png)
 
 # Страница досок
 
 - Страница /boards отображает список всех досок (проектов)
 - Клик по доске открывает страницу /board/:id со всеми задачами этой доски
 
-![ProjectPage](ProjectPage.png)
+![ProjectPage](assets\ProjectPage.png)
 
 # Страница доски проекта
 
@@ -84,16 +84,37 @@ _Поддерживает предзаполненные поля_
   - Меняет статус задачи без перезагрузки страницы
   - Клик по задаче открывает модальное окно редактирования
 
-![BoardPage](BoardPage.png)
+![BoardPage](assets\BoardPage.png)
 
 # Смена статуса через компонент Chip
 
 Для повышения удобства редактирования задач реализована возможность изменения статуса задачи напрямую через компонент Chip
 
-![UpdateStatusChip](UpdateStatusChip.png)
+![UpdateStatusChip](assets\UpdateStatusChip.png)
 
 ## Установка и запуск
 
+1. Клонирование репозитория
+
+```bash
+git clone https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025
+```
+
+2. Настройка файла окружения
+
+   - Скопируйте файл .env.example
+   - Переименуйте в .env
+
+3. Запуск проекта
+
+```bash
+docker-compose up --build
+```
+
+После успешного запуска:
+
+- Фронтенд: http://localhost:3000
+- Бэкенд: http://localhost:8080/swagger/index.html
 
 ## Обоснование дополнительных технологий
 
