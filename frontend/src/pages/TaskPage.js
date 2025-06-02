@@ -14,14 +14,32 @@ import ApiServices from "../services/ApiServices";
 import ListTask from "../components/task/ListTask";
 import Search from "../components/search/Search";
 import { statuses } from "../utils/Constants";
+import { useDispatch, useSelector } from "react-redux";
+import { setTasks } from "../store/slices/taskSlice";
 
 export default function TaskPage() {
-  const { tasks, boards } = ApiServices();
+  const dispatch = useDispatch();
+  const { getTasks, getBoards } = ApiServices();
+  const tasks = useSelector((state) => state.task.tasks);
+  const [boards, setBoards] = useState([]);
   const [filteredTask, setFilteredTask] = useState(tasks);
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState(null);
   const [boardFilter, setBoardFilter] = useState(null);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      dispatch(setTasks(await getTasks()));
+    };
+
+    const fetchBoards = async () => {
+      setBoards(await getBoards());
+    };
+
+    fetchTasks();
+    fetchBoards();
+  }, [dispatch]); 
 
   const handleSearchChange = (term) => {
     setSearchTerm(term);

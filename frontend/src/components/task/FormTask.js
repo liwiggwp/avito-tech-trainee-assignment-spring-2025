@@ -21,8 +21,10 @@ export default function FormTask() {
   const { isOpen, mode, currentTask, boardId } = useSelector(
     (state) => state.form
   );
+  const [boards, setBoards] = useState([]);
+  const [users, setUsers] = useState([]);
 
-  const { users, boards, createTask, updateTask, getBoardsById } =
+  const { getUsers, getBoards, createTask, updateTask, getBoardsById } =
     ApiServices();
 
   const [formData, setFormData] = useState({
@@ -33,6 +35,19 @@ export default function FormTask() {
     status: statuses.find((s) => s.name === "Backlog")?.id,
     responsible: "",
   });
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setUsers(await getUsers());
+    };
+
+    const fetchBoards = async () => {
+      setBoards(await getBoards());
+    };
+
+    fetchUsers();
+    fetchBoards();
+  }, []);
 
   useEffect(() => {
     if (mode === "edit" && currentTask) {

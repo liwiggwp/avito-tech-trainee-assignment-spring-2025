@@ -1,18 +1,12 @@
 import httpService from "./HttpServices";
-import { useState, useEffect } from "react";
 
 export default function ApiServices() {
   const { get, post, put } = httpService();
-  const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState(null);
-  const [boards, setBoards] = useState([]);
-  const [users, setUsers] = useState([]);
 
   const getTasks = async () => {
     try {
       const response = await get(`/tasks`);
-      setTasks(response.data.data);
-      return response;
+      return response.data.data;
     } catch (error) {
       throw error;
     }
@@ -21,7 +15,7 @@ export default function ApiServices() {
   const getTaskById = async (id) => {
     try {
       const response = await get(`/tasks/${id}`);
-      setTask(response.data);
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -60,8 +54,7 @@ export default function ApiServices() {
   const getBoards = async () => {
     try {
       const response = await get(`/boards`);
-      setBoards(response.data.data);
-      return response;
+      return response.data.data;
     } catch (error) {
       throw error;
     }
@@ -79,18 +72,11 @@ export default function ApiServices() {
   const getUsers = async () => {
     try {
       const response = await get(`/users`);
-      setUsers(response.data.data);
-      return response;
+      return response.data.data;
     } catch (error) {
       throw error;
     }
   };
-
-  useEffect(() => {
-    getTasks();
-    getBoards();
-    getUsers();
-  }, []);
 
   return {
     getTasks,
@@ -101,9 +87,5 @@ export default function ApiServices() {
     getBoards,
     getBoardsById,
     getUsers,
-    tasks,
-    task,
-    boards,
-    users,
   };
 }
