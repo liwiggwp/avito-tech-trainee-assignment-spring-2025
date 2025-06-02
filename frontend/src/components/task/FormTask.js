@@ -13,6 +13,7 @@ import { statuses, priorities } from "../../utils/Constants";
 import { useSelector, useDispatch } from "react-redux";
 import { closeForm } from "../../store/slices/formSlice";
 import ApiServices from "../../services/ApiServices";
+import { setTasks, updatedTask } from "../../store/slices/taskSlice";
 
 export default function FormTask() {
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ export default function FormTask() {
     (state) => state.form
   );
 
-  const { users, boards, createTask, updateTask } = ApiServices();
+  const { users, boards, createTask, updateTask, getBoardsById } =
+    ApiServices();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -68,11 +70,23 @@ export default function FormTask() {
           ...payload,
           status: statuses.find((s) => s.id === formData.status)?.name,
         });
+
+        const newPayload = {
+          ...currentTask,
+          ...payload,
+          status: statuses.find((s) => s.id === formData.status)?.name,
+          assignee: users.find((u) => u.id === formData.responsible),
+        };
+
+        dispatch(updatedTask(newPayload));
       } else {
         await createTask({
           ...payload,
-          boardId: formData.project,
+          boardId: Number(formData.project),
         });
+
+        const updatedTasks = await getBoardsById(boardId);
+        dispatch(setTasks(updatedTasks));
       }
       handleClose();
     } catch (e) {
