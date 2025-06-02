@@ -2,7 +2,12 @@ import React from "react";
 import { Box, Typography, Paper, Divider } from "@mui/material";
 import CardTaskBoard from "./CardTaskBoard";
 
-export default function ColumnBoard({ nameColumn, taskBoard }) {
+export default function ColumnBoard({
+  nameColumn,
+  taskBoard,
+  status,
+  onDropTask,
+}) {
   return (
     <>
       <Paper
@@ -15,6 +20,11 @@ export default function ColumnBoard({ nameColumn, taskBoard }) {
           borderRadius: 2,
           display: "flex",
           flexDirection: "column",
+        }}
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => {
+          const taskId = e.dataTransfer.getData("taskId");
+          onDropTask(taskId, status);
         }}
       >
         <Typography variant="h5" sx={{ mb: 2 }}>

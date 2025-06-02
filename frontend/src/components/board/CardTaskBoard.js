@@ -24,6 +24,10 @@ export default function CardTaskBoard({ task }) {
         onClick={() => dispatch(openEditForm({ ...task, boardId: id }))}
         key={task.id}
         sx={{ mb: 2, cursor: "pointer" }}
+        draggable
+        onDragStart={(e) => {
+          e.dataTransfer.setData("taskId", task.id);
+        }}
       >
         <CardContent sx={{ p: 2 }}>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>

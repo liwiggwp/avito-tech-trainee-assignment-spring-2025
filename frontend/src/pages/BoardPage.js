@@ -17,7 +17,7 @@ export default function BoardPage() {
 
   const tasks = useSelector((state) => state.task.tasks);
 
-  const { getBoardsById } = ApiServices(id);
+  const { getBoardsById, updateStatusTask } = ApiServices(id);
 
   useEffect(() => {
     if (id) {
@@ -32,6 +32,15 @@ export default function BoardPage() {
     }
   }, [id, location.state, dispatch, navigate, location.pathname]);
 
+  const handleDropTask = async (taskId, newStatus) => {
+    try {
+      await updateStatusTask(taskId, { status: newStatus });
+      const updatedData = await getBoardsById(id);
+      dispatch(setTasks(updatedData));
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <Typography variant="h4" sx={{ mb: 2 }}>
@@ -43,6 +52,8 @@ export default function BoardPage() {
             key={status.id}
             nameColumn={getColumnNameById(status.id)}
             taskBoard={tasks.filter((task) => task.status === status.name)}
+            status={status.name}
+            onDropTask={handleDropTask}
           />
         ))}
       </Box>
