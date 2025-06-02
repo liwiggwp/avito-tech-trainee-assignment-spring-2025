@@ -48,7 +48,7 @@ _Поддерживает предзаполненные поля_
 - Статус
 - Исполнитель
 
-![TaskForm](https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025/tree/main/assets/TaskForm.png)
+![TaskForm](./assets/TaskForm.png)
 
 # Просмотр задач
 
