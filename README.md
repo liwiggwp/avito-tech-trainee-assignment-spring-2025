@@ -48,7 +48,7 @@ _Поддерживает предзаполненные поля_
 - Статус
 - Исполнитель
 
-![TaskForm](assets\TaskForm.png)
+![TaskForm](https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025/tree/main/assets/TaskForm.png)
 
 # Просмотр задач
 
@@ -57,7 +57,7 @@ _Поддерживает предзаполненные поля_
 - Клик по задаче открывает модальное окно с возможностью редактирования информации
 - Есть возможность перейти из задачи на страницу доски проекта, к которому она принадлежит
 
-![TaskPage](assets\TaskPage.png)
+![TaskPage](https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025/tree/main/assets/TaskPage.png)
 
 # Фильтрация и поиск задач
 
@@ -68,14 +68,14 @@ _Поддерживает предзаполненные поля_
 - По исполнителю
 - По названию задачи
 
-![SearchAndFilter](assets\SearchAndFilter.png)
+![SearchAndFilter](https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025/tree/main/assets/SearchAndFilter.png)
 
 # Страница досок
 
 - Страница /boards отображает список всех досок (проектов)
 - Клик по доске открывает страницу /board/:id со всеми задачами этой доски
 
-![ProjectPage](assets\ProjectPage.png)
+![ProjectPage](https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025/tree/main/assets/ProjectPage.png)
 
 # Страница доски проекта
 
@@ -84,13 +84,13 @@ _Поддерживает предзаполненные поля_
   - Меняет статус задачи без перезагрузки страницы
   - Клик по задаче открывает модальное окно редактирования
 
-![BoardPage](assets\BoardPage.png)
+![BoardPage](https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025/tree/main/assets/BoardPage.png)
 
 # Смена статуса через компонент Chip
 
 Для повышения удобства редактирования задач реализована возможность изменения статуса задачи напрямую через компонент Chip
 
-![UpdateStatusChip](assets\UpdateStatusChip.png)
+![UpdateStatusChip](https://github.com/liwiggwp/avito-tech-trainee-assignment-spring-2025/tree/main/assets/UpdateStatusChip.png)
 
 ## Установка и запуск
 
