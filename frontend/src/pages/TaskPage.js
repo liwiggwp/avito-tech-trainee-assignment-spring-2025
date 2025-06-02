@@ -19,11 +19,13 @@ export default function TaskPage() {
   const { tasks, boards } = ApiServices();
   const [filteredTask, setFilteredTask] = useState(tasks);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState(null);
   const [boardFilter, setBoardFilter] = useState(null);
 
-  const handleSearchChange = (searchTerm) => {
-    filterTasks(searchTerm, statusFilter, boardFilter);
+  const handleSearchChange = (term) => {
+    setSearchTerm(term);
+    filterTasks(term, statusFilter, boardFilter);
   };
 
   const handleFilterClick = (event) => {
@@ -35,22 +37,24 @@ export default function TaskPage() {
   };
 
   const handleStatusFilter = (status) => {
-    setStatusFilter(status === statusFilter ? null : status);
-    filterTasks(null, status === statusFilter ? null : status, boardFilter);
+    const newStatus = status === statusFilter ? null : status;
+    setStatusFilter(newStatus);
+    filterTasks(searchTerm, newStatus, boardFilter);
     handleFilterClose();
   };
 
   const handleBoardFilter = (board) => {
-    setBoardFilter(board === boardFilter ? null : board);
-    filterTasks(null, statusFilter, board === boardFilter ? null : board);
+    const newBoard = board === boardFilter ? null : board;
+    setBoardFilter(newBoard);
+    filterTasks(searchTerm, statusFilter, newBoard);
     handleFilterClose();
   };
 
-  const filterTasks = (searchTerm, status, board) => {
+  const filterTasks = (search, status, board) => {
     let filtered = [...tasks];
 
-    if (searchTerm) {
-      const lowerSearch = searchTerm.toLowerCase();
+    if (search) {
+      const lowerSearch = search.toLowerCase();
       filtered = filtered.filter(
         (task) =>
           task.title.toLowerCase().includes(lowerSearch) ||
@@ -137,9 +141,7 @@ export default function TaskPage() {
                 {board.name}
               </MenuItem>
             ))}
-
             <Divider />
-
             <MenuItem
               onClick={clearFilters}
               disabled={!statusFilter && !boardFilter}

@@ -4,11 +4,12 @@ import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function ({ onSearchChange }) {
+export default function Search ({ onSearchChange }) {
   const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
+    onSearchChange(event.target.value);
   };
 
   const handleKeyDown = (event) => {
@@ -18,7 +19,7 @@ export default function ({ onSearchChange }) {
   };
 
   return (
-     <Box
+    <Box
       sx={{
         position: "relative",
         backgroundColor: alpha("#161616", 0.15),
