@@ -3,8 +3,11 @@ import { Chip, Menu, MenuItem } from "@mui/material";
 import { statuses } from "../utils/Constants";
 import { statusColor } from "../utils/ColorChip";
 import ApiServices from "../services/ApiServices";
+import { useDispatch } from "react-redux";
+import { updatedTask } from "../store/slices/taskSlice";
 
 export default function StatusChipMenu({ task, onStatusUpdated }) {
+  const dispatch = useDispatch();
   const { updateStatusTask } = ApiServices();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -19,6 +22,9 @@ export default function StatusChipMenu({ task, onStatusUpdated }) {
 
   const handleStatusChange = async (status) => {
     await updateStatusTask(task.id, { status: status.name });
+
+    dispatch(updatedTask({ ...task, status: status.name }));
+
     handleMenuClose();
     if (onStatusUpdated) onStatusUpdated(status.name);
   };
@@ -37,7 +43,7 @@ export default function StatusChipMenu({ task, onStatusUpdated }) {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
-        onClick={e => e.stopPropagation()} 
+        onClick={(e) => e.stopPropagation()}
       >
         {statuses.map((status) => (
           <MenuItem
